@@ -7,6 +7,7 @@
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+{{-- @dump(auth()->user()->id) --}}
 <body>
     <div class="container-fluid">
         <div class="row">

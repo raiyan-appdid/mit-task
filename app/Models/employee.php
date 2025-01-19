@@ -4,10 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class employee extends Model
+class employee extends Authenticatable
 {
+    use HasFactory, Notifiable, HasApiTokens;
+    protected $gaurd = 'employee';
 
     public function projects()
     {
@@ -28,4 +34,6 @@ class employee extends Model
     {
         return $this->projects()->count();
     }
+
+
 }

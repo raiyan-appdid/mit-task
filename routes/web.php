@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\employeeController;
 use App\Http\Controllers\projectController;
+use App\Http\Controllers\AuthController;
 
 
 Route::get('/login', [App\Http\Controllers\AdminController::class, 'showLoginForm'])->name('login');
@@ -40,6 +41,10 @@ Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboar
         Route::put('/dashboard/projects/{id}', [ProjectController::class, 'update'])->name('project.update');
 
         Route::delete('/dashboard/projects/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
+
+        //apis
+
+
 
 
 
