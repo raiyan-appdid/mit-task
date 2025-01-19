@@ -34,7 +34,7 @@
             <label for="phone" class="form-label">Phone</label>
             <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter employee phone number" required>
         </div>
-
+ 
         <div class="mb-3">
             <label for="image" class="form-label">Profile Image</label>
             <input type="file" class="form-control" id="image" name="image" required>
