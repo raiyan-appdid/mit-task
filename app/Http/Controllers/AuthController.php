@@ -28,4 +28,23 @@ class AuthController extends Controller
 
         return response()->json(['error' => 'Unauthorized'], 401);
     }
+
+    public function employeeLogout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Logged out']);
+    }
+
+    public function projectList(Request $request)
+{
+    \Log::info($request->all());
+    $userId = $request->user()->id;
+    $projects = DB::table('employee_project')
+        ->join('projects', 'employee_project.project_id', '=', 'projects.id')
+        ->where('employee_project.user_id', $userId)
+        ->select('projects.*')
+        ->get();
+
+    return response()->json(['projects' => $projects]);
+}
 }

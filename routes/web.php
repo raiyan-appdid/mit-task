@@ -15,14 +15,18 @@ Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboar
     ->name('dashboard');
 
         Route::get('/dashboard/employee', [App\Http\Controllers\employeeController::class, 'index'])
-        ->middleware('admin')
+        // ->middleware('admin')
         ->name('employee');
 
         Route::get('/dashboard/add-employee', [App\Http\Controllers\employeeController::class, 'add'])
-        ->middleware('admin')
+        // ->middleware('admin')
         ->name('view-employee');
 
-        Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
+        Route::post('/dashboard/add-employee', [App\Http\Controllers\employeeController::class, 'store'])
+        // ->middleware('admin')
+        ->name('store-employee');
+
+        Route::post('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
         Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('employee.update');
 
         Route::delete('/employees/{id}', [employeeController::class, 'destroy'])->name('employee.destroy');
