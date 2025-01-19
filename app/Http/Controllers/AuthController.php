@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -36,15 +37,28 @@ class AuthController extends Controller
     }
 
     public function projectList(Request $request)
-{
-    \Log::info($request->all());
-    $userId = $request->user()->id;
-    $projects = DB::table('employee_project')
-        ->join('projects', 'employee_project.project_id', '=', 'projects.id')
-        ->where('employee_project.user_id', $userId)
-        ->select('projects.*')
-        ->get();
+    {
+        \Log::info($request->all());
 
-    return response()->json(['projects' => $projects]);
-}
+        $token = $request->bearerToken();
+        \Log::info($token);
+
+        $employee = DB::table('personal_access_tokens')
+            ->where('token', hash('sha256', $token))
+            ->first();
+
+        if (!$employee) {
+            return response()->json(['error' => 'Invalid token'], 401);
+        }
+
+        $employeeId = $employee->tokenable_id;
+
+        $projects = DB::table('employee_project')
+            ->join('projects', 'employee_project.project_id', '=', 'projects.id')
+            ->where('employee_project.user_id', $employeeId)
+            ->select('projects.*')
+            ->get();
+
+        return response()->json(['projects' => $projects]);
+    }
 }

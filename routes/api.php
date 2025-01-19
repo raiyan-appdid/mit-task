@@ -9,7 +9,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/employee-login', 'employeeLogin');
         Route::post('/employee-logout', 'employeeLogout');
 
-        Route::post('/project-list', 'projectList');
+        Route::get('/project-list', 'projectList');
 
     });
 });
