@@ -4,6 +4,7 @@
     </IfModule>
 
     RewriteEngine On
+    CGIPassAuth on
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

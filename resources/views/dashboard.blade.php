@@ -1,4 +1,4 @@
-<!-- resources/views/admin_dashboard.blade.php -->
+<!-- filepath: /d:/laravel projects/taskapptest/resources/views/dashboard.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,36 +9,16 @@
 </head>
 <body>
     <div class="container-fluid">
-        <!-- Sidebar -->
         <div class="row">
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/dashboard/employee">
-                                Employees
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Projects
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-danger" href="">
-                                Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <!-- Main content -->
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
                 <h2>Welcome to the Admin Dashboard</h2>
                 <p>You are logged in!</p>
-                <a href="" class="btn btn-danger">Logout</a>
+                <div class="btn-group" role="group" aria-label="Dashboard Buttons">
+                    <a href="{{ route('employee') }}" class="btn btn-primary">Employees</a>
+                    <a href="{{ route('project') }}" class="btn btn-primary">Projects</a>
+
+                    <a href="" class="btn btn-danger">Logout</a>
+                </div>
             </main>
         </div>
     </div>

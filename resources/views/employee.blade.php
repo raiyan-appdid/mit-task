@@ -30,8 +30,8 @@
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->project_count }}</td>
                     <td>
-                        <a href="" >Edit</a>
-                        <form action="" method="POST">
+                        <a href="{{ route('employee.edit', $employee->id) }}" >Edit</a>
+                        <form action="{{ route('employee.destroy', $employee->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Delete</button>

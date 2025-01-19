@@ -20,11 +20,8 @@ class employeeController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
-            'phone' => 'required|string|max:15',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'password' => 'required|',
+            'password' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -46,17 +43,34 @@ class employeeController extends Controller
 
     public function edit($id) {
         $employee = Employee::find($id);
-        return view('employee_edit', compact('employee'));
+        return view('edit_employee', compact('employee'));
     }
 
     public function update(Request $request, $id) {
-        $employee = Employee::find($id);
-        $employee->update($request->all());
-        return redirect()->route('employee.index');
+    $validatedData = $request->validate([
+        'name' => 'required|string',
+        'phone' => 'required|string',
+        'password' => 'nullable|string',
+    ]);
+
+    $employee = employee::findOrFail($id);
+
+    $employee->name = $request->name;
+    $employee->phone = $request->phone;
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('employee_images', 'public');
+        $employee->image = $imagePath;
+    }
+    if ($request->filled('password')) {
+        $employee->password = Hash::make($request->password);
+    }
+    $employee->save();
+        return redirect()->route('employee');
     }
 
     public function destroy($id) {
         Employee::find($id)->delete();
-        return redirect()->route('employee.index');
+        return redirect()->route('employee');
     }
 }

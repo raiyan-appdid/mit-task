@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class admin extends Authenticatable
 {
     use Notifiable;
+    protected $guard = 'admin';
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);

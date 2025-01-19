@@ -16,11 +16,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // dd(Auth::user());
-        // if(Auth::user()->role=="admin"){
-        //     echo "sdfsdfsdf";
+        if (Auth::guard('admin')->check()) {
             return $next($request);
-        // }
-        abort(401);
+        }
+
+        Auth::guard('admin')->logout();
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
 }

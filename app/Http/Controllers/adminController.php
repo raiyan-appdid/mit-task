@@ -22,9 +22,10 @@ class adminController extends Controller
         ]);
 
         $admin = admin::where('email', $request->email)->first();
+        $credentials = $request->only('email', 'password');
 
-        if ($admin && Hash::check($request->password, $admin->password)) {
-            Auth::login($admin);
+        if ($admin && Hash::check($request->password, $admin->password) && Auth::guard('admin')->attempt($credentials)) {
+            // Auth::login($admin);
             return redirect()->route('dashboard');
 
         } else {

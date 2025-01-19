@@ -21,4 +21,8 @@ class project extends Model
         return $value ? date('d-m-Y', strtotime($value)) : null;
     }
 
+    public function getEmployeeCountAttribute()
+    {
+        return $this->employees()->count();
+    }
 }
