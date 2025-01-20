@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class employee extends Authenticatable
+class Employee extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
     protected $gaurd = 'employee';

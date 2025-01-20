@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 
-class employeeController extends Controller
+class EmployeeController extends Controller
 {
     public function index() {
         $employees = Employee::all();

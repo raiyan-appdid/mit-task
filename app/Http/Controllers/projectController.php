@@ -9,7 +9,7 @@ use App\Models\EmployeeProject;
 
 use Illuminate\Http\Request;
 
-class projectController extends Controller
+class ProjectController extends Controller
 {
     public function index() {
         $projects = Project::all();
